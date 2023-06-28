@@ -34,7 +34,7 @@ private ClientRegistration sampleClientRegistrationOidc() {
             .clientName("sample-oidc")
             .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
             .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-            .redirectUri("http://localhost:8080/login/oauth2/code/sample-oidc")
+            .redirectUri("http://localhost:8080/login/oauth2/code/sample-oidc") // {baseUrl}/login/oauth2/code/{registrationId}
             .scope("openid", "profile")
             .providerConfigurationMetadata(configurationMetadata)
             .authorizationUri("http://auth-server:9000/oauth2/authorize")
@@ -68,3 +68,8 @@ ClientRegistration clientRegistration = ClientRegistrations.fromIssuerLocation("
     .scope("openid", "profile")
     .build();
 ```
+
+
+[Reference][ref]
+
+[ref]: https://docs.spring.io/spring-security/reference/servlet/oauth2/client/index.html
