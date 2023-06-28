@@ -96,9 +96,8 @@ public class SecurityConfig {
                     types.add(AuthorizationGrantType.JWT_BEARER);
                 })
 
-                .redirectUri("http://localhost:8080/login/oauth2/code/sample-oidc")
+                .redirectUri("http://localhost:8080/login/oauth2/code/sample-oidc") // {host}/login/oauth2/code/{registeredId}
                 .redirectUri("http://localhost:8080/authorized")
-                .redirectUri("http://localhost:8080/login/oauth2/code/sample")
 
                 // https://github.com/spring-projects/spring-authorization-server/issues/266
                 .postLogoutRedirectUri("http://localhost:8080/logged-out")
