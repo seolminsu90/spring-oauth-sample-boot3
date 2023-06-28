@@ -3,10 +3,17 @@ server:
 
 logging:
   level:
-    root: INFO
+    root: DEBUG
     org.springframework.web: DEBUG
     org.springframework.security: DEBUG
     org.springframework.security.oauth2: DEBUG
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    cache: false
+  h2:
+    console:
+      enabled: true # h2-console jdbc:h2:mem:testdb sa/
 #
 #spring:
 #  security:
