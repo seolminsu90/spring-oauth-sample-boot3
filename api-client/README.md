@@ -51,7 +51,7 @@ Logout redirect 자체가 최근에 나온 기능이기도 하고 Java config로
 
 아마도 yml 기반 ClientRegistration에서는 issuer 기반으로 자동 설정되는 듯 하다.   
 
-** 그렇다면 Java config에서도 자동 설정이 있을 것이다.. **
+**그렇다면 Java config에서도 자동 설정이 있을 것이다..**
 
 찾아보니 있다.   
 
@@ -60,7 +60,7 @@ Logout redirect 자체가 최근에 나온 기능이기도 하고 Java config로
 
 ***ClientRegistration 예시***
 ```
-ClientRegistration clientRegistration = ClientRegistrations.fromOidcIssuerLocation("http://auth-server:9000")
+ClientRegistration clientRegistration = ClientRegistrations.fromIssuerLocation("http://auth-server:9000")
     .registrationId("sample-oidc")
     .clientId("sample")
     .clientSecret("sample")
