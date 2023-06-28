@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+  security:
+    oauth2:
+      client:
+        provider:
+          spring:
+            issuer-uri: http://auth-server:9000
