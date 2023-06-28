@@ -1,4 +1,4 @@
-#### 로그아웃 이슈
+## 로그아웃 이슈
 
 ClientRegistration을 Java-config로 생성해서 그런건지 모르겠지만 로그아웃이 제대로 되지 않는 문제가 발생했다.   
 Client에서 OidcClientInitiatedLogoutSuccessHandler를 등록해서 oidc oauth Logout이 동작하도록 설정했는데 요청 진행이 제대로 되지 않았다.   

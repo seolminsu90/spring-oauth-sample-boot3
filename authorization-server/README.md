@@ -1,4 +1,4 @@
-#### device_code 를 이용한 인증 에시
+## device_code 를 이용한 인증 예시
 
 제한된 디스플레이 또는 입력 장치가 있는 디바이스에서 인증을 수행해야 할 때 사용된다. 예를 들어, 텔레비전, 게임 콘솔, IoT 장치 등이 이에 해당한다.   
 디바이스에서 인증 서버로 device_code 요청 후 별도의 웹(모바일웹) 환경의 인증 서버에 device_code를 입력하면 디바이스에서 토큰을 발급할 수 있게 된다.   
@@ -60,7 +60,7 @@ curl -v -XPOST -d "grant_type=urn:ietf:params:oauth:grant-type:device_code&devic
 
 > 아래의 인증과 다르게 refresh_token까지 받아오는 것을 알 수 있다.
 
-#### client_credentials 을 이용한 서비스 어플리케이션에서 자원(API server) 직접 요청
+## client_credentials 을 이용한 서비스 어플리케이션에서 자원(API server) 직접 요청
 
 Background Service, Batch, Api To Api 서비스등 에서는 `client_credentials`를 이용하여 자원을 요청한다.   
 client_credentials의 경우 `authorization_code` 발급이 생략되고 바로 `access_token`을 발급받게 된다.   
