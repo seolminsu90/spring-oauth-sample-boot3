@@ -13,7 +13,7 @@ public class DbConfig {
     @Bean
     public DataSource embeddedDatabase() {
         return new EmbeddedDatabaseBuilder()
-                .generateUniqueName(true)
+                .setName("testdb;DB_CLOSE_ON_EXIT=false")
                 .setType(EmbeddedDatabaseType.H2)
                 .setScriptEncoding("UTF-8")
                 .addScript("org/springframework/security/oauth2/server/authorization/oauth2-authorization-schema.sql")

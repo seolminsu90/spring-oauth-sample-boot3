@@ -10,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
+
+import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
 @Configuration
 @EnableWebSecurity
@@ -21,9 +24,12 @@ public class DefaultSecurityConfig {
         http
                 .authorizeHttpRequests(authorize ->
                         authorize
+                                .requestMatchers(toH2Console()).permitAll()
                                 .requestMatchers("/assets/**", "/webjars/**", "/login").permitAll()
                                 .anyRequest().authenticated()
                 )
+                .headers(header -> header.addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
+                .csrf(csrf -> csrf.ignoringRequestMatchers(toH2Console()))
                 .formLogin(Customizer.withDefaults())
                 .formLogin(form -> form
                         .loginPage("/login")

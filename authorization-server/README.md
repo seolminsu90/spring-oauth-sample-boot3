@@ -94,6 +94,23 @@ curl -v -XGET -H'Content-type:application/json' -H'Authorization:Bearer {{access
 Hello world !
 ```
 
-#### Authorization server openid spec 확인
+## Authorization server openid spec 확인
 
 http://auth-server:9000/.well-known/openid-configuration
+
+
+## 주요 컴포넌트
+
+`OAuth2ClientAuthenticationFilter`   
+
+클라이언트 인증 담당   
+
+`OAuth2TokenEndpointFilter`   
+토큰 발급 담당   
+
+`BearerTokenAuthenticationFilter`    
+Bearer 토큰 인증 담당   
+
+`ProviderManager(AuthenticationManager)`   
+가지고 있는 provider 목록을 순회하면서 provider가 실행 가능한 경우에 provider의 authenticate 메소드를 호출하여 인증 절차를 수행함
+각 AuthenticationProvider는 인증 성공, 실패, 결정할 수 없음을 나타낼 수 있고, 나머지 AuthenticationProvider가 결정을 할 수 있도록 전달한다.

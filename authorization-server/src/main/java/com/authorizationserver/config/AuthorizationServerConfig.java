@@ -24,6 +24,7 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
+import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
@@ -76,6 +77,7 @@ public class AuthorizationServerConfig {
         return http.build();
     }
 
+    // 데이터베이스 :: 인증클라이언트 등록 테이블 (기본 - 메모리)
     @Bean
     public RegisteredClientRepository registeredClientRepository(JdbcTemplate jdbcTemplate) {
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
@@ -99,6 +101,7 @@ public class AuthorizationServerConfig {
                 .postLogoutRedirectUri("http://localhost:8080/logged-out")
                 .scope(OidcScopes.OPENID)
                 .scope(OidcScopes.PROFILE)
+                .tokenSettings(TokenSettings.builder().build()) // Token Setting
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build()) // 권한 묻는 페이지
                 .build();
 
@@ -107,6 +110,7 @@ public class AuthorizationServerConfig {
                 .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
                 .authorizationGrantType(AuthorizationGrantType.DEVICE_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .tokenSettings(TokenSettings.builder().build()) // Token Setting
                 .scope("sample.role")
                 .build();
 
@@ -118,12 +122,15 @@ public class AuthorizationServerConfig {
         return registeredClientRepository;
     }
 
+    // OAuth2AuthorizationService 를 직접 구현해서 Jpa나 Mybatis 등등 다른걸로 연동할 수도 있을 듯 하다.
+    // 데이터베이스 :: 인증 정보 저장소 (기본 - 메모리)
     @Bean
     public OAuth2AuthorizationService authorizationService(JdbcTemplate jdbcTemplate,
                                                            RegisteredClientRepository registeredClientRepository) {
         return new JdbcOAuth2AuthorizationService(jdbcTemplate, registeredClientRepository);
     }
 
+    // 데이터베이스 :: 권한 동의 정보 저장 테이블 (기본 - 메모리)
     @Bean
     public OAuth2AuthorizationConsentService authorizationConsentService(JdbcTemplate jdbcTemplate,
                                                                          RegisteredClientRepository registeredClientRepository) {
