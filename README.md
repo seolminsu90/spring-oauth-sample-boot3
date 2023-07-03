@@ -14,8 +14,9 @@
   - 리소스 서버 관리
 - (완료) 유저 DB 연동
   - 메모리 유저에서 실제 데이터로 처리
-- (완료) keycloak / openldap 연동
+- (완료) openldap 연동
   - 공통 유저로서의 처리
+  - keycloak 은 자체가 oauth server 대용이 되는것 같으므로 PASS
 
 [참조][ref]
 
