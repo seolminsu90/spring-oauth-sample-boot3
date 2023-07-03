@@ -12,9 +12,9 @@
   - 단일 게이트웨이 인증 처리
 - spring-cloud-eureka 연동 (api-resource-server)
   - 리소스 서버 관리
-- 유저 DB 연동
+- (완료) 유저 DB 연동
   - 메모리 유저에서 실제 데이터로 처리
-- keycloak / openldap 연동 (잘 모름)
+- (완료) keycloak / openldap 연동
   - 공통 유저로서의 처리
 
 [참조][ref]

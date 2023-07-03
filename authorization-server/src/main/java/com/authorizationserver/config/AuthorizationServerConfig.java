@@ -8,7 +8,10 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -37,7 +40,10 @@ public class AuthorizationServerConfig {
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http, RegisteredClientRepository registeredClientRepository, AuthorizationServerSettings authorizationServerSettings)
+    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http,
+                                                                      RegisteredClientRepository registeredClientRepository,
+                                                                      AuthorizationServerSettings authorizationServerSettings,
+                                                                      AuthenticationManager authManager)
             throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 
@@ -74,7 +80,20 @@ public class AuthorizationServerConfig {
                 .oauth2ResourceServer((resourceServer) -> resourceServer
                         .jwt(Customizer.withDefaults()));
 
+        http.authenticationManager(authManager);
+
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authManager(HttpSecurity http,
+                                             AuthenticationProvider ldapAuthenticationProvider,
+                                             AuthenticationProvider daoAuthenticationProvider) throws Exception {
+        AuthenticationManagerBuilder authenticationManagerBuilder =
+                http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.authenticationProvider(ldapAuthenticationProvider);
+        authenticationManagerBuilder.authenticationProvider(daoAuthenticationProvider);
+        return authenticationManagerBuilder.build();
     }
 
     // 데이터베이스 :: 인증클라이언트 등록 테이블 (기본 - 메모리)

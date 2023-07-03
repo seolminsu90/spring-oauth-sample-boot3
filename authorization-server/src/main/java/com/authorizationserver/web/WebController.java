@@ -27,6 +27,11 @@ public class WebController {
         this.authorizationConsentService = authorizationConsentService;
     }
 
+    @GetMapping(value = "/")
+    public String index() {
+        return "index.html";
+    }
+
     @GetMapping(value = "/oauth2/consent")
     public String consent(Principal principal, Model model,
                           @RequestParam(OAuth2ParameterNames.CLIENT_ID) String clientId,

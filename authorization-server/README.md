@@ -114,3 +114,10 @@ Bearer 토큰 인증 담당
 `ProviderManager(AuthenticationManager)`   
 가지고 있는 provider 목록을 순회하면서 provider가 실행 가능한 경우에 provider의 authenticate 메소드를 호출하여 인증 절차를 수행함
 각 AuthenticationProvider는 인증 성공, 실패, 결정할 수 없음을 나타낼 수 있고, 나머지 AuthenticationProvider가 결정을 할 수 있도록 전달한다.
+
+
+## 기타
+
+openldap과 연동하여 user database + ldap 두개의 provider를 통한 인증 구현함.   
+
+https://github.com/seolminsu90/keycloak-openldap-docker 링크를 통한 간이 구축으로 테스트 해볼 수 있다.
