@@ -20,6 +20,11 @@
 - (완료) openldap 연동
   - 공통 유저로서의 처리
   - keycloak 은 자체가 oauth server 대용이 되는것 같으므로 PASS
+ 
+#### 최종 그림
+
+api-client (프론트엔드) -> api-gateway (공통게이트웨이) -> authorization-server (인증) / resource-server (자원)
+
 
 [참조][ref]
 
