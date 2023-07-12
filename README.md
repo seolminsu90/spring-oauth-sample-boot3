@@ -21,6 +21,12 @@
   - 공통 유저로서의 처리
   - keycloak 은 자체가 oauth server 대용이 되는것 같으므로 PASS
 
-[참조][ref]
+#### 대략적인 구상 (물론 하다 말 수도 있음)
 
+![대략적인 구상](system.png)
+
+[참조][ref]
+[UML][uml]
+
+[uml]: https://app.creately.com/d/jwVSWX8lIVR/edit
 [ref]: https://docs.spring.io/spring-authorization-server/docs/current/reference/html/index.html
