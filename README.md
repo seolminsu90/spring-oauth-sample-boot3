@@ -8,10 +8,13 @@
 
 #### TODO?
 
-- spring-cloud-gateway 연동 (oauth-client)
+- (하는중) spring-cloud-gateway 연동 (oauth-client)
   - 단일 게이트웨이 인증 처리
+  - 서킷브레이커/폴백처리/캐싱 등등
+  - 라우트 DB화
 - spring-cloud-eureka 연동 (api-resource-server)
   - 리소스 서버 관리
+  - spring-cloud-config 별도 구축 처리
 - (완료) 유저 DB 연동
   - 메모리 유저에서 실제 데이터로 처리
 - (완료) openldap 연동
